@@ -1,0 +1,18 @@
+name: "Central Environment Variables"
+description: "Load centralized environment variables for pipelines"
+
+runs:
+  using: "composite"
+
+  steps:
+    - name: Load environment variables
+      shell: bash
+      run: |
+        echo "Loading centralized variables..."
+
+        while IFS='=' read -r key value
+        do
+          if [[ -n "$key" && ! "$key" =~ ^# ]]; then
+            echo "$key=$value" >> "$GITHUB_ENV"
+          fi
+        done < "$GITHUB_ACTION_PATH/variables.env"

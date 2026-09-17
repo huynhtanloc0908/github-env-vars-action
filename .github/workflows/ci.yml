@@ -1,0 +1,20 @@
+name: Test Central Variables
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Load central variables
+        uses: huynhtanloc0908/github-env-vars-action@main
+
+      - name: Print variables
+        run: |
+          echo "Company: $COMPANY"
+          echo "Project: $PROJECT"
+          echo "Environment: $ENVIRONMENT"
+          echo "Python: $PYTHON_VERSION"
+          echo "QAC: $QAC_VERSION"
